@@ -1,4 +1,4 @@
-import { Ship } from '../functions/ship.js';
+import { Ship } from '../factories/ship.js';
 
 test('check ship object has properties', () => {
   expect(Ship(5).isSunk()).toBe(false);
