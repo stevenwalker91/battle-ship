@@ -1,6 +1,6 @@
 
 export const Ship = (length) => {
-  let hits = 1;
+  let hits = 0;
 
   const hit = () => {
     hits ++;
