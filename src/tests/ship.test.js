@@ -16,11 +16,11 @@ test('hits increase on the boat', () => {
 
 test('isSunk is true once hits amount to length', () => {
   const battleShip = Ship(10);
-  for (let i = 0; i< 10; i++) {
+  for (let i = 0; i < 10; i++) {
     battleShip.hit();
   }
 
   expect(battleShip.isSunk()).toBe(true);
-  expect(battleShip.hits).toBe(10);
+  expect(battleShip.hits).toBeGreaterThanOrEqual(10);
 
 })

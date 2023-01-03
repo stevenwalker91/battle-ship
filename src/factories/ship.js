@@ -1,13 +1,13 @@
 
 export const Ship = (length) => {
-  let hits = 0;
+  let hits = 1;
 
   const hit = () => {
     hits ++;
   }
 
   const isSunk = () => {
-    if (length === hits) return true;
+    if (length <= hits) return true;
     return false;
   }
 
