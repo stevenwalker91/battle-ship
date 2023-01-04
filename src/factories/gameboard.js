@@ -1,4 +1,5 @@
 import { Ship } from './ship.js';
+import isEqual from 'lodash/isEqual';
 
 
 export const Gameboard = () => {
@@ -12,21 +13,12 @@ export const Gameboard = () => {
     [null, null, null, null, null, null, null],
     [null, null, null, null, null, null, null]
   ];
-
-  //ship positions tracks where each boat is
-  const shipPositions = [
-    [null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null]
-  ];
+  
+  const ships = [];
 
   const _checkCoordEmpty = coord => {
     
-    if (shipPositions[coord[0]][coord[1]] === null) {
+    if (gameboard[coord[0]][coord[1]] === null) {
       return true;
     }
     return false;
@@ -35,7 +27,7 @@ export const Gameboard = () => {
   const _checkCoordLegal = coord => {
     const gameBoardPiece = gameboard[coord[0]][coord[1]];
 
-    if (gameBoardPiece === null) {
+    if (gameBoardPiece === null || gameBoardPiece === 'unhit ship'){
       return true;
     };
     return false;
@@ -51,10 +43,30 @@ export const Gameboard = () => {
     }
 
     const newShip = Ship(shipSize);
-    
+    ships.push({ship: newShip, coordinates: coords, status: 'not sunk'});
+
     for (const coord of coords) {
-      shipPositions[coord[0]][coord[1]] = newShip;
+      gameboard[coord[0]][coord[1]] = 'unhit ship';
     }
+  }
+
+  const findBoatToAttack = (coord) => {
+    //console.log(ships[0])
+    //console.log(ships[0].coordinates)
+
+    // can't directly compare an array to an array so iterate and compare values
+    ships.forEach(boat => {
+      boat.coordinates.forEach(position => {
+        if(isEqual(position, coord)){
+          boat.ship.hit();
+        }
+      })
+    })
+
+    
+
+
+    
   }
 
   const receiveAttack = (coord) => {
@@ -64,21 +76,24 @@ export const Gameboard = () => {
       gameboard[coord[0]][coord[1]] = 'miss';
     } else {
       gameboard[coord[0]][coord[1]] = 'hit';
-      shipPositions[coord[0]][coord[1]].hit();
-    
+      //find relevant boat to update
+      findBoatToAttack(coord);
     }
   }
+
+  
 
 
   return {
     get gameboard() {
       return gameboard;
     },
-    get shipPositions() {
-      return shipPositions;
+    get ships() {
+      return ships;
     },
     placeShip,
-    receiveAttack
+    receiveAttack,
+  
   }
 
 }

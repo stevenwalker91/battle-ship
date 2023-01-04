@@ -19,13 +19,14 @@ describe('place ships on the gameboard', () => {
     gameBoardOne.placeShip([[2,2],[2,3]], 'carrier')
   })
   
-  test('place ship adds ship to correct coords', () => {
-  
-    expect(gameBoardOne.shipPositions[1][2]).toHaveProperty('length', 3);
-    expect(gameBoardOne.shipPositions[1][3]).toHaveProperty('length', 3);
-    expect(gameBoardOne.shipPositions[1][4]).toHaveProperty('length', 3);
-    expect(gameBoardOne.shipPositions[2][3]).toHaveProperty('length', 2);
-  
+  test('ships array is updated with correct coordinates', () => {
+    expect(gameBoardOne.ships[0]).toHaveProperty('coordinates', [[1,2],[1,3],[1,4]]);
+  });
+  test('gameboard is updated with boat position', () => {
+    expect(gameBoardOne.gameboard[1][2]).toBe('unhit ship');
+    expect(gameBoardOne.gameboard[1][3]).toBe('unhit ship');
+    expect(gameBoardOne.gameboard[1][4]).toBe('unhit ship');
+
   });
 
   test('ships cant overwrite other ships', () => {
@@ -41,7 +42,17 @@ describe('gameboard can receive attacks', () => {
   })
   
   test('ship hits property is updated', () => {
-    expect(gameBoardOne.shipPositions[1][2]).toHaveProperty('hits', 1);
+    expect(gameBoardOne.ships[0].ship).toHaveProperty('hits', 1);
+  })
+
+  test('correct ship object gets updated', () => {
+    gameBoardOne.placeShip([[3,4],[3,5]], 'battleship');
+    gameBoardOne.placeShip([[4,4],[4,5]], 'battleship');
+
+    gameBoardOne.receiveAttack([4,4]);
+
+    expect(gameBoardOne.ships[1].ship).toHaveProperty('hits', 0);
+    expect(gameBoardOne.ships[2].ship).toHaveProperty('hits', 1);
   })
 
   test('gameboard is updated correctly when a ship is hit', () => {
@@ -51,7 +62,6 @@ describe('gameboard can receive attacks', () => {
   test('misses also get added to the gameboard', () => {
     gameBoardOne.receiveAttack([5,6]);
     expect(gameBoardOne.gameboard[5][6]).toBe('miss');
-    expect(gameBoardOne.shipPositions[5][6]).toBe(null);
   })
   
 })
