@@ -51,9 +51,6 @@ export const Gameboard = () => {
   }
 
   const findBoatToAttack = (coord) => {
-    //console.log(ships[0])
-    //console.log(ships[0].coordinates)
-
     // can't directly compare an array to an array so iterate and compare values
     ships.forEach(boat => {
       boat.coordinates.forEach(position => {
@@ -62,11 +59,6 @@ export const Gameboard = () => {
         }
       })
     })
-
-    
-
-
-    
   }
 
   const receiveAttack = (coord) => {
@@ -81,8 +73,12 @@ export const Gameboard = () => {
     }
   }
 
-  
-
+  const checkFleetSunk = () => {
+    for (const boat of ships) {
+      if(!boat.ship.isSunk()) return false;
+    }
+    return true;
+  }
 
   return {
     get gameboard() {
@@ -93,6 +89,7 @@ export const Gameboard = () => {
     },
     placeShip,
     receiveAttack,
+    checkFleetSunk
   
   }
 

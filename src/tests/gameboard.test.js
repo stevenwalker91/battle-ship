@@ -66,3 +66,15 @@ describe('gameboard can receive attacks', () => {
   
 })
 
+describe('gameboard can check if the entire fleet is sunk', () => {
+  test('returns true if fleet is sunk', () => {
+    expect(gameBoardOne.checkFleetSunk()).toBe(true);
+  })
+
+  test('returns false if any boats remain', () => {
+    gameBoardOne.placeShip([[4,4],[4,5]], 'battleship');
+
+    expect(gameBoardOne.checkFleetSunk()).toBe(false);
+  })
+})
+
