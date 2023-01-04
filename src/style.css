@@ -1,0 +1,53 @@
+body {
+  margin: 0px;
+  min-height: 100vh;
+}
+
+.app {
+  align-items: center;
+  padding: 25px;
+  height: 100%;
+
+
+}
+
+.column {
+  flex-direction: column;
+  gap: 30px;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+}
+
+input {
+  padding: 5px;
+  width: 100%;
+}
+
+#board-container {
+  gap: 100px;
+  flex-wrap: wrap;
+}
+
+.board {
+  display: grid;
+  grid-template: repeat(7, 1fr) / repeat(7, 1fr);
+  gap: 5px;
+
+}
+
+.board-space {
+  width: 40px;
+  height: 40px;
+  border: 1px solid black;
+}
+
+.available-tile:hover {
+  cursor: pointer;
+}
+
+.hide {
+  display: none;
+}
