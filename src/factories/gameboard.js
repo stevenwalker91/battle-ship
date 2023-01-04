@@ -1,5 +1,6 @@
 import { Ship } from './ship.js';
 import isEqual from 'lodash/isEqual';
+import * as listeners from '../dom/listeners.js';
 
 
 export const Gameboard = () => {

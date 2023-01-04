@@ -21,10 +21,16 @@ const addPlayerNameToUi= (name) => {
   nameSpan.innerText = name;
 }
 
+const renderAttack = (attackedBoard) => {
+  console.log(attackedBoard);
+
+}
+
 
 export {
   hideStartScreen,
   getPlayerName,
   displayGameBoards,
-  addPlayerNameToUi
+  addPlayerNameToUi,
+  renderAttack
 }
