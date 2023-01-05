@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --verbose",
+    "test": "jest --verbose --env=jsdom",
     "build": "webpack",
     "start": "webpack serve --open"
   },
@@ -27,6 +27,7 @@
     "eslint": "8.31.0",
     "eslint-config-prettier": "8.6.0",
     "jest": "29.3.1",
+    "jest-environment-jsdom": "29.3.1",
     "prettier": "2.8.1",
     "style-loader": "3.3.1",
     "webpack": "5.75.0",

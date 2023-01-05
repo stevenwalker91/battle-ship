@@ -1,5 +1,5 @@
 
-export const Ship = (length) => {
+export const Ship = (length, type) => {
   let hits = 0;
 
   const hit = () => {
@@ -13,6 +13,7 @@ export const Ship = (length) => {
 
   return {
     length,
+    type,
     get hits() {
       return hits;
     },

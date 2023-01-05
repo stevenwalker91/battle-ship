@@ -35,15 +35,13 @@ export const Gameboard = () => {
   }
 
   const placeShip = (coords, shipType) => {
-    
     const shipSize = coords.length;
-
     // first iterate over the coordinates and check there is no ship there already
     for (const coord of coords) {
       if (!_checkCoordEmpty(coord)) throw `There's already a ship here.`;
     }
 
-    const newShip = Ship(shipSize);
+    const newShip = Ship(shipSize, shipType);
     ships.push({ship: newShip, coordinates: coords, status: 'not sunk'});
 
     for (const coord of coords) {
@@ -53,26 +51,35 @@ export const Gameboard = () => {
 
   const _attackBoat = (coord) => {
     // can't directly compare an array to an array so iterate and compare values
-    ships.forEach(boat => {
-      boat.coordinates.forEach(position => {
+    
+    for (const boat of ships) {
+
+      for (const position of boat.coordinates) {
         if(isEqual(position, coord)){
           boat.ship.hit();
+          const returnValue = { status: 'hit', boatSunk: false, coord: position, shipType: boat.ship.type }
+          if(boat.ship.isSunk()) {
+            boat.status = 'sunk';
+            returnValue.boatSunk = true;
+          }
+          return returnValue;
         }
-      })
-    })
+      }
+    }
   }
+
 
   const receiveAttack = (coord) => {
     if (!_checkCoordLegal(coord)) throw `You've already made that move.`;
 
     if (_checkCoordEmpty(coord)) {
       gameboard[coord[0]][coord[1]] = 'miss';
-      return 'miss';
+      return { status: 'missed', boatSunk: false, coord: coord }
     } else {
       gameboard[coord[0]][coord[1]] = 'hit';
       //find relevant boat to update
-      _attackBoat(coord);
-      return 'hit';
+      
+      return _attackBoat(coord);
     }
   }
 
@@ -97,6 +104,19 @@ export const Gameboard = () => {
     return availableMoves;
   }
 
+  const getBoatPositions = () => {
+    const boatPositions= [];
+    gameboard.forEach((outerArray, outerIndex) => {
+      outerArray.forEach((innerArray, innerIndex) => {
+        if(innerArray === 'unhit ship' || innerArray === 'hit') {
+          boatPositions.push([outerIndex, innerIndex])
+        }
+      })
+    })
+
+    return boatPositions;
+  }
+
   return {
     get gameboard() {
       return gameboard;
@@ -107,7 +127,8 @@ export const Gameboard = () => {
     placeShip,
     receiveAttack,
     checkFleetSunk,
-    getAvailableMoves
+    getAvailableMoves,
+    getBoatPositions
   
   }
 

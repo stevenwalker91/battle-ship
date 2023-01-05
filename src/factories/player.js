@@ -18,7 +18,8 @@ export const Computer = (name) =>  {
     const availableMoves = playerBoard.getAvailableMoves();
     const numberOfMoves = availableMoves.length;
     const selectedMove = Math.floor(Math.random() * numberOfMoves);
-    playerBoard.receiveAttack(availableMoves[selectedMove]);
+    return playerBoard.receiveAttack(availableMoves[selectedMove]);
+ 
 
   }
 

@@ -3,18 +3,18 @@ import { Gameboard } from './gameboard';
 
 const Game = (playerName) => {
   const playerOne = Player(playerName);
-  const playerTwo = Computer('evilAI');
+  const playerTwo = Computer('Computer');
 
   const playerBoard = Gameboard();
   const enemyBoard = Gameboard();
 
-  playerBoard.placeShip( [[0,1], [0,2], [0,3]] )
-  playerBoard.placeShip( [[1,1], [1,2]] )
-  playerBoard.placeShip( [[5,4], [5, 5], [5, 6]] )
+  playerBoard.placeShip([[0,1], [0,2], [0,3]], 'battleship' )
+  playerBoard.placeShip( [[1,1], [1,2]], 'patroller' )
+  playerBoard.placeShip( [[5,4], [5, 5], [5, 6]], 'destroyer' )
 
-  enemyBoard.placeShip( [[0,1], [0,2], [0,3]] )
-  enemyBoard.placeShip( [[1,1], [1,2]] )
-  enemyBoard.placeShip( [[5,4], [5, 5], [5, 6]] )
+  enemyBoard.placeShip( [[0,1], [0,2], [0,3]], 'battleship' )
+  enemyBoard.placeShip( [[1,1], [1,2]], 'patroller' )
+  enemyBoard.placeShip( [[5,4], [5, 5], [5, 6]], 'destroyer' )
   
 
 

@@ -6,18 +6,29 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="main.js" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+  <style>
+
+  </style>
   <title>Battle Ship</title>
 </head>
 
 <body>
   <div class="app flex column">
+    <h1>Battleship</h1>
     <div id="welcome-screen">
       <form id="welcome-form" class="flex">
         <label for="name">
-          <input type="text" id="name" name="name" placeholder="Please enter your name">
+          <input type="text" id="name" name="name" placeholder="Please enter your name" value="No Name Given">
         </label>
         <button type="submit" id="start-game">Start Game</button>
       </form>
+    </div>
+    <div id="feedback-container" class="hide"><strong>Results:</strong>
+      <p id="player-feedback"></p>
+      <p id="computer-feedback"></p>
     </div>
     <div id="board-container" class="flex hide">
       <div class="player-container">
@@ -105,7 +116,7 @@
           <div class="board-space available-tile" data-row="3" data-column="4"></div>
           <div class="board-space available-tile" data-row="3" data-column="5"></div>
           <div class="board-space available-tile" data-row="3" data-column="6"></div>
-          <div class="board-space available-tile" data-row="0" data-column="0"></div>
+          <div class="board-space available-tile" data-row="4" data-column="0"></div>
           <div class="board-space available-tile" data-row="4" data-column="1"></div>
           <div class="board-space available-tile" data-row="4" data-column="2"></div>
           <div class="board-space available-tile" data-row="4" data-column="3"></div>

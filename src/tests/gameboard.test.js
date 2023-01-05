@@ -78,7 +78,7 @@ describe('gameboard can check if the entire fleet is sunk', () => {
   })
 })
 
-describe('gameboard can return available moves', () => {
+describe('gameboard can return boats and moves', () => {
   const allMoves = [
     [0,0],[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],
     [1,0],[1,1],[1,2],[1,3],[1,4],[1,5],[1,6],
@@ -108,6 +108,14 @@ describe('gameboard can return available moves', () => {
     gameBoardOne.receiveAttack([5,5]);
 
     expect(gameBoardOne.getAvailableMoves()).toStrictEqual(limitedMoves);
+  })
+
+  test('correct list of ship coords is returned', () => {
+    gameBoardOne.placeShip([[1,2],[1,3],[1,4]], 'battleship')
+    gameBoardOne.placeShip([[2,2],[2,3]], 'carrier')
+    gameBoardOne.receiveAttack([1,3]);
+
+    expect(gameBoardOne.getBoatPositions()).toStrictEqual([[1,2], [1,3], [1,4],[2,2],[2,3]])
   })
 })
 
