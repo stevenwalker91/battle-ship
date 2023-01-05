@@ -3,7 +3,7 @@ import { Gameboard } from '../factories/gameboard.js';
 export const Player = (name) => {
   
   const makeAttack = (coords, enemyBoard) => {
-    enemyBoard.receiveAttack(coords);
+    return enemyBoard.receiveAttack(coords);
   }
 
   return {

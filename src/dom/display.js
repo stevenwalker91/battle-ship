@@ -1,4 +1,5 @@
-
+import * as controller from '../controller.js';
+import * as listeners from './listeners.js';
 
 const hideStartScreen = () => {
   const screen = document.getElementById('welcome-screen');
@@ -21,9 +22,14 @@ const addPlayerNameToUi= (name) => {
   nameSpan.innerText = name;
 }
 
-const renderAttack = (attackedBoard) => {
-  console.log(attackedBoard);
+const renderAttack = (attackPoint, result) => {
+  const boardPiece = attackPoint;
+  attackPoint.innerText = result;
+}
 
+const removeFieldFromPlay = (element) => {
+  element.classList.toggle('available-tile');
+  element.removeEventListener('click', listeners.attackFunction)
 }
 
 
@@ -32,5 +38,6 @@ export {
   getPlayerName,
   displayGameBoards,
   addPlayerNameToUi,
-  renderAttack
+  renderAttack,
+  removeFieldFromPlay
 }

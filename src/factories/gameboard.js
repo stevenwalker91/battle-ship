@@ -67,10 +67,12 @@ export const Gameboard = () => {
 
     if (_checkCoordEmpty(coord)) {
       gameboard[coord[0]][coord[1]] = 'miss';
+      return 'miss';
     } else {
       gameboard[coord[0]][coord[1]] = 'hit';
       //find relevant boat to update
       _attackBoat(coord);
+      return 'hit';
     }
   }
 
