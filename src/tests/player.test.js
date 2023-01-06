@@ -50,6 +50,5 @@ describe('each player can attack', () => {
     expect(playerBoard.gameboard[1][2]).toBe('miss');
     expect(enemyBoard.gameboard[1][2]).toBe(null);
 
-    console.log(playerBoard.gameboard)
   })
 })

@@ -90,9 +90,9 @@ export const Gameboard = () => {
     return true;
   }
 
-  const getAvailableMoves = () => {
+  const getAvailableMoves = (board) => {
     const availableMoves = [];
-    gameboard.forEach((outerArray, outerIndex) => {
+    board.forEach((outerArray, outerIndex) => {
       outerArray.forEach((innerArray, innerIndex) => {
         if(_checkCoordLegal([outerIndex, innerIndex])) {
           availableMoves.push([outerIndex, innerIndex])
@@ -117,6 +117,69 @@ export const Gameboard = () => {
     return boatPositions;
   }
 
+  const randomBoatPosition = (length) => {
+    const potentialPosition = [];
+
+    const searchGameboardRows = () => {
+      const viableStartPositions = [];
+
+      // iterae through the rows and add to array of viable positions when length is found
+      gameboard.forEach((row, rowIndex) => {
+        let count = 0;
+        row.forEach((item, itemIndex) => {
+          if (item === null) {
+            count ++;
+          } else {
+            count = 0;
+          }
+          // return the item - length to go back and get the starting point rather than end
+          if (count >= length) {
+            viableStartPositions.push([rowIndex, itemIndex-length+1]);
+          }
+        })
+      })
+      return viableStartPositions;
+    }
+
+    const generateReturnCoords = (start, direction) => {
+      const returnArray = [];
+      const startRow = start[0];
+      const startItem = start[1];
+
+      if (direction === 'horizontal') {
+        for (let i = startItem; i < startItem + length; i++) {
+          returnArray.push([startRow, i]);
+        }
+      } else {
+        for (let i = startRow; i < startRow + length; i++) {
+          returnArray.push([i, startItem]);
+        }
+      }
+      return returnArray
+    }
+
+    let potentialStartingPoints;
+    let direction;
+
+    // randomly decide if the boat will be placed vertically or hortizontally
+    if (Math.floor(Math.random() * 2) === 1) {
+      direction = 'horizontal';
+      potentialStartingPoints = searchGameboardRows();
+    } else {
+      direction = 'horizontal';
+      potentialStartingPoints = searchGameboardRows();
+    }
+
+    const randomStartPoint = Math.floor(Math.random() * potentialStartingPoints.length);
+
+    const startPoint = potentialStartingPoints[randomStartPoint];
+    const returnValues = generateReturnCoords(startPoint, direction)
+
+
+    return returnValues
+  }
+
+
   return {
     get gameboard() {
       return gameboard;
@@ -128,7 +191,8 @@ export const Gameboard = () => {
     receiveAttack,
     checkFleetSunk,
     getAvailableMoves,
-    getBoatPositions
+    getBoatPositions,
+    randomBoatPosition
   
   }
 

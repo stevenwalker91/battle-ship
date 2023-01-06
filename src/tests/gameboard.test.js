@@ -99,7 +99,7 @@ describe('gameboard can return boats and moves', () => {
   ]
 
   test('array of moves is returned', () => {
-    expect(gameBoardOne.getAvailableMoves()).toStrictEqual(allMoves);
+    expect(gameBoardOne.getAvailableMoves(gameBoardOne.gameboard)).toStrictEqual(allMoves);
   })
 
   test('array only shows moves that are available', () => {
@@ -107,7 +107,7 @@ describe('gameboard can return boats and moves', () => {
     gameBoardOne.receiveAttack([3,2]);
     gameBoardOne.receiveAttack([5,5]);
 
-    expect(gameBoardOne.getAvailableMoves()).toStrictEqual(limitedMoves);
+    expect(gameBoardOne.getAvailableMoves(gameBoardOne.gameboard)).toStrictEqual(limitedMoves);
   })
 
   test('correct list of ship coords is returned', () => {
@@ -119,3 +119,27 @@ describe('gameboard can return boats and moves', () => {
   })
 })
 
+
+
+describe('the gameboard can generate random ship positions', () => {
+  test('gameboard can generate a single horizontal ship', () => {
+    jest.spyOn(global.Math, 'random').mockReturnValue(0.1);
+    expect(gameBoardOne.randomBoatPosition(3)).toStrictEqual([ [ 0, 3 ], [ 0, 4 ], [ 0, 5 ] ])
+    jest.spyOn(global.Math, 'random').mockRestore();
+  })
+
+  test('gameboard can generate a single vertical ship', () => {
+    jest.spyOn(global.Math, 'random').mockReturnValue(0.1);
+    expect(gameBoardOne.randomBoatPosition(3)).toStrictEqual([ [ 0, 3 ], [ 0, 4 ], [ 0, 5 ] ])
+    jest.spyOn(global.Math, 'random').mockRestore();
+  })
+
+  test('gameboard can generate multiple ships', () => {
+    jest.spyOn(global.Math, 'random').mockReturnValue(0.1);
+    expect(gameBoardOne.randomBoatPosition(3)).toStrictEqual([ [ 0, 3 ], [ 0, 4 ], [ 0, 5 ] ])
+    jest.spyOn(global.Math, 'random').mockReturnValue(0.2); //seventh move
+    expect(gameBoardOne.randomBoatPosition(3)).toStrictEqual([ [ 1, 2 ], [ 1, 3 ], [ 1, 4 ] ])
+    jest.spyOn(global.Math, 'random').mockRestore();
+  })
+  
+})

@@ -10,6 +10,7 @@ body {
   align-items: center;
   padding: 25px;
   height: 100%;
+  width: 60%;
 
 
 }
@@ -36,14 +37,14 @@ input {
 
 .board {
   display: grid;
-  grid-template: repeat(7, 1fr) / repeat(7, 1fr);
+  grid-template: repeat(7, 40px) / repeat(7, 40px);
   gap: 5px;
+  justify-content: center;
 
 }
 
 .board-space {
-  width: 40px;
-  height: 40px;
+
   border: 1px solid black;
   display: flex;
   justify-content: center;
