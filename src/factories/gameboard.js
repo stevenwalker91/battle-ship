@@ -141,6 +141,30 @@ export const Gameboard = () => {
       return viableStartPositions;
     }
 
+    const searchGameBoardCols = () => {
+      const viableStartPositions = [];
+      let rowCount = gameboard.length;
+      let colCount = gameboard.length;
+
+      for (let i = 0; i < colCount; i++) {
+        let matchCount = 0;
+        for (let j = 0; j < rowCount; j++) {
+          const arrayItem = gameboard[j][i]
+          if (arrayItem === null) {
+            matchCount++;
+          } else {
+            matchCount = 0;
+          }
+          if (matchCount >= length) {
+            viableStartPositions.push([j-length+1, i]);
+          }
+        }
+      }
+      return viableStartPositions;
+
+
+    }
+
     const generateReturnCoords = (start, direction) => {
       const returnArray = [];
       const startRow = start[0];
@@ -166,19 +190,17 @@ export const Gameboard = () => {
       direction = 'horizontal';
       potentialStartingPoints = searchGameboardRows();
     } else {
-      direction = 'horizontal';
-      potentialStartingPoints = searchGameboardRows();
+      direction = 'vertical';
+      potentialStartingPoints = searchGameBoardCols();
     }
 
     const randomStartPoint = Math.floor(Math.random() * potentialStartingPoints.length);
-
     const startPoint = potentialStartingPoints[randomStartPoint];
-    const returnValues = generateReturnCoords(startPoint, direction)
+    const returnValues = generateReturnCoords(startPoint, direction);
 
-
+    console.log(returnValues)
     return returnValues
   }
-
 
   return {
     get gameboard() {

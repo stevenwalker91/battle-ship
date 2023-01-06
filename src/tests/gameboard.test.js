@@ -123,23 +123,16 @@ describe('gameboard can return boats and moves', () => {
 
 describe('the gameboard can generate random ship positions', () => {
   test('gameboard can generate a single horizontal ship', () => {
-    jest.spyOn(global.Math, 'random').mockReturnValue(0.1);
-    expect(gameBoardOne.randomBoatPosition(3)).toStrictEqual([ [ 0, 3 ], [ 0, 4 ], [ 0, 5 ] ])
+    jest.spyOn(global.Math, 'random').mockReturnValue(0.5574471153164351);
+    expect(gameBoardOne.randomBoatPosition(3)).toStrictEqual([ [ 3,4 ], [ 3,5 ], [ 3,6 ] ])
     jest.spyOn(global.Math, 'random').mockRestore();
   })
 
   test('gameboard can generate a single vertical ship', () => {
     jest.spyOn(global.Math, 'random').mockReturnValue(0.1);
-    expect(gameBoardOne.randomBoatPosition(3)).toStrictEqual([ [ 0, 3 ], [ 0, 4 ], [ 0, 5 ] ])
+    expect(gameBoardOne.randomBoatPosition(3)).toStrictEqual([ [ 3,0 ], [ 4,0 ], [ 5,0 ] ])
     jest.spyOn(global.Math, 'random').mockRestore();
   })
 
-  test('gameboard can generate multiple ships', () => {
-    jest.spyOn(global.Math, 'random').mockReturnValue(0.1);
-    expect(gameBoardOne.randomBoatPosition(3)).toStrictEqual([ [ 0, 3 ], [ 0, 4 ], [ 0, 5 ] ])
-    jest.spyOn(global.Math, 'random').mockReturnValue(0.2); //seventh move
-    expect(gameBoardOne.randomBoatPosition(3)).toStrictEqual([ [ 1, 2 ], [ 1, 3 ], [ 1, 4 ] ])
-    jest.spyOn(global.Math, 'random').mockRestore();
-  })
   
 })

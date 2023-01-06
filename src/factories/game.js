@@ -1,5 +1,6 @@
 import { Player, Computer } from './player';
 import { Gameboard } from './gameboard';
+import * as json from '../ships.json';
 
 const Game = (playerName) => {
   const playerOne = Player(playerName);
@@ -8,13 +9,22 @@ const Game = (playerName) => {
   const playerBoard = Gameboard();
   const enemyBoard = Gameboard();
 
-  playerBoard.placeShip([[0,1], [0,2], [0,3]], 'battleship' )
-  playerBoard.placeShip( [[1,1], [1,2]], 'patroller' )
-  playerBoard.placeShip( [[5,4], [5, 5], [5, 6]], 'destroyer' )
 
-  enemyBoard.placeShip( [[0,1], [0,2], [0,3]], 'battleship' )
-  enemyBoard.placeShip( [[1,1], [1,2]], 'patroller' )
-  enemyBoard.placeShip( [[5,4], [5, 5], [5, 6]], 'destroyer' )
+  const data = json;
+
+
+  for (const boat of data.boats) {
+
+    const playerBoatPosition = playerBoard.randomBoatPosition(boat.size);
+    const enemyBoatPosition = enemyBoard.randomBoatPosition(boat.size);
+
+    playerBoard.placeShip(playerBoatPosition, boat.name)
+    enemyBoard.placeShip(enemyBoatPosition, boat.name)
+  
+
+  }
+
+
   
 
 

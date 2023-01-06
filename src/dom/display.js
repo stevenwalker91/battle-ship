@@ -40,7 +40,7 @@ const renderAttack = (attackPoint, result, domBoard) => {
 }
 
 const removeFieldFromPlay = (coords) => {
-  const element = findGamePiece('enemy', coords);
+  const element = findGamePiece('player', coords);
   element.classList.toggle('available-tile');
   element.removeEventListener('click', listeners.attackFunction)
 }
