@@ -198,7 +198,6 @@ export const Gameboard = () => {
     const startPoint = potentialStartingPoints[randomStartPoint];
     const returnValues = generateReturnCoords(startPoint, direction);
 
-    console.log(returnValues)
     return returnValues
   }
 

@@ -31,37 +31,44 @@ const orchestrateAttack = (event) => {
     let attackPoint;
     let attack;
     let domBoard;
+    let boardToAttack;
+    let customFeedbackMessage;
 
     // define the attack parameters based on player
     if (activePlayer === playGame.playerOne) {
-      const boardToAttack = playGame.enemyBoard;
+      boardToAttack = playGame.enemyBoard;
       attackPoint = [Number(event.target.dataset.row), Number(event.target.dataset.column)];
       attack = activePlayer.makeAttack(attackPoint, boardToAttack);
       domBoard = 'player';
       display.removeFieldFromPlay(attackPoint);
+      customFeedbackMessage = ` You sunk their ${attack.shipType}!`
     } else {
-      const boardToAttack = playGame.playerBoard;
+      boardToAttack = playGame.playerBoard;
       attack = activePlayer.dumbComputerAttack(boardToAttack);
-
-
       domBoard = 'enemy';
+      customFeedbackMessage = ` They sunk your ${attack.shipType}!`
     }
     
     let messageToPrint = `${activePlayer.name} ${attack.status} [${attack.coord[0]+1}, ${attack.coord[1]+1}].`
 
     if (attack.boatSunk) {
-      messageToPrint += ` They sunk your ${attack.shipType}!`
+      messageToPrint += customFeedbackMessage;
     }
 
     display.renderAttack(attack.coord, attack.status, domBoard);
     display.printMoveToUi(messageToPrint, domBoard);
+
+     // check for gameover
+     if (boardToAttack.checkFleetSunk()) {
+      playGame.gameOver()
+      return;
+    }
 
     if (activePlayer === playGame.playerTwo) {
       activePlayer = playGame.playerOne;
     } else {
       activePlayer = playGame.playerTwo;
     }
-
     
     loop++
     if (loop < 2) {
