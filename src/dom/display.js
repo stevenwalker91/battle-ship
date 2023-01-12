@@ -107,6 +107,20 @@ const addWinnerToModal = (winner) => {
   const winnerField = document.getElementById('winner-message');
   winnerField.innerText = `${winner} won!`
 }
+
+const resetGameBoard = () => {
+  const gamePieces = document.querySelectorAll('.board-space');
+
+  gamePieces.forEach(piece => {
+    piece.classList.remove('boat-position', 'hit', 'missed');
+    piece.innerText = '';
+    if (piece.parentElement.id === 'enemy-board' && !piece.classList.contains('available-tile')) {
+      piece.classList.add('available-tile');
+      piece.addEventListener('click', listeners.attackFunction)
+    }
+
+  })
+}
   
 
 
@@ -121,5 +135,6 @@ export {
   renderShips,
   printMoveToUi,
   toggleModal,
-  addWinnerToModal
+  addWinnerToModal,
+  resetGameBoard
 }

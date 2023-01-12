@@ -25,6 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
     tile.addEventListener('click', attackFunction)
   })
 
+  const restartBtn = document.getElementById('restart');
+  restartBtn.addEventListener('click', controller.orchestrateRestartGame)
+
 
 })
 

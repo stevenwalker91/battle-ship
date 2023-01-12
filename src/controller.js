@@ -6,9 +6,13 @@ import { Player } from './factories/player.js';
 let playGame;
 let activePlayer;
 
-const orchestrateStartGame = () => {
-  display.hideStartScreen();
-  display.displayGameBoards();
+const orchestrateStartGame = (restart = false) => {
+
+  if (!restart)  {
+    display.hideStartScreen();
+    display.displayGameBoards();
+  }
+  
 
   const playerName = display.getPlayerName();
   display.addPlayerNameToUi(playerName);
@@ -61,8 +65,6 @@ const orchestrateAttack = (event) => {
      // check for gameover
      if (boardToAttack.checkFleetSunk()) {
       playGame.gameOver(activePlayer);
-      console.log('gameover')
-    
       return;
     }
 
@@ -74,19 +76,28 @@ const orchestrateAttack = (event) => {
     
     loop++
     if (loop < 2) {
-      setTimeout(makeAttack, 1250)
+      setTimeout(makeAttack, 1)
     }
 
   }
 
   makeAttack();
-  
-  
+}
+
+const orchestrateRestartGame = () => {
+
+  display.resetGameBoard();
+  display.toggleModal();
+  orchestrateStartGame(true);
+  //hide the modal
+  //start a new game
+
 }
 
 export {
   orchestrateStartGame,
-  orchestrateAttack
+  orchestrateAttack,
+  orchestrateRestartGame
 }
 
 
