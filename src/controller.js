@@ -76,7 +76,7 @@ const orchestrateAttack = (event) => {
     
     loop++
     if (loop < 2) {
-      setTimeout(makeAttack, 1)
+      setTimeout(makeAttack, 1000)
     }
 
   }
