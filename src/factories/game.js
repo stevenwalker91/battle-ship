@@ -22,7 +22,8 @@ const Game = (playerName) => {
   }
 
   const gameOver = (winner) => {
-    console.log(winner)
+    display.toggleModal();
+    display.addWinnerToModal(winner.name);
 
   }
 

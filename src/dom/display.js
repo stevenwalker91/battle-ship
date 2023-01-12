@@ -96,8 +96,16 @@ const printMoveToUi = (message, player) => {
 
   typeWriter();
 
-  
+}
 
+const toggleModal = () => {
+  const modal = document.getElementById('modal');
+  modal.classList.toggle('hide');
+}
+
+const addWinnerToModal = (winner) => {
+  const winnerField = document.getElementById('winner-message');
+  winnerField.innerText = `${winner} won!`
 }
   
 
@@ -111,5 +119,7 @@ export {
   renderAttack,
   removeFieldFromPlay,
   renderShips,
-  printMoveToUi
+  printMoveToUi,
+  toggleModal,
+  addWinnerToModal
 }

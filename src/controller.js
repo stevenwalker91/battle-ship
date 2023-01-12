@@ -60,7 +60,9 @@ const orchestrateAttack = (event) => {
 
      // check for gameover
      if (boardToAttack.checkFleetSunk()) {
-      playGame.gameOver()
+      playGame.gameOver(activePlayer);
+      console.log('gameover')
+    
       return;
     }
 
