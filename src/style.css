@@ -27,7 +27,16 @@ body {
 
 input {
   padding: 5px;
-  width: 100%;
+  width: 150px;
+  height: 20px;
+  border: 1px solid gray;
+  margin: 0px;
+  border-right: 0px;
+}
+
+button {
+  border: 1px solid gray;
+  margin: 0px;
 }
 
 #board-container {
